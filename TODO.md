@@ -25,4 +25,7 @@ just like pytorch lightning
 
 - Setup Sphinx Documentation
 
+- Add modification for import statements, so that we can simply do import experiment.yaml and our parser will take care
+of it, wouldn't this be really nice ?
+
 - Create a Package out of it once the above stuffs are done, and publish on PyPi
