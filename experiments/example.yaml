@@ -1,0 +1,36 @@
+name: TTC_EXAMPLE
+log_dir: logs
+chkpt_dir: checkpoint
+use_checkpoints: false
+
+# model_init: ""
+
+device: GPU
+
+model:
+    name: MNISTV1
+
+dataset:
+    name: MNIST
+    transforms: MNISTTransforms
+    root: data
+    loader_args:
+        batch_size: 128
+        num_workers: 2
+        shuffle: True
+        pin_memory: True
+
+loss: CrossEntropyLoss
+
+lr_scheduler:
+    type: OneCycleLR
+    args:
+        max_lr: 0.6
+
+optimizer:
+    type: AdamW
+    args:
+        lr: 0.01
+
+training:
+    epochs: 3
