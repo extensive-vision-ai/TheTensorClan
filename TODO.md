@@ -23,4 +23,6 @@ would be really nice, wont't it ?
 to train an epoch, test and epoch, and what all to log, and the rest of the stuff the trainer should take care
 just like pytorch lightning
 
+- Setup Sphinx Documentation
+
 - Create a Package out of it once the above stuffs are done, and publish on PyPi

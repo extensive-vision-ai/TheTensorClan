@@ -1,6 +1,6 @@
 <div align="center"> <img src="logo.png" > </div>
 
-<h1 align="center">The Tensor Clan - Tensor Training Framework</h1>
+<h1 align="center">Tensor Training Framework</h1>
 
 ---
 
@@ -27,4 +27,4 @@ A: Someone who does a lot of experimentation, and would like to train networks q
 
 ---
 
-<h3 align="center">Made with 💘 TheTensorClan</h3>
+<h3 align="center">Made with 💘 by TheTensorClan</h3>
