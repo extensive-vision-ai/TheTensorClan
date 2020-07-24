@@ -1,4 +1,8 @@
-# The Tensor Clan - Tensor Training Framework
+<div align="center"> <img src="logo.png" > </div>
+
+<h1 align="center">The Tensor Clan - Tensor Training Framework</h1>
+
+---
 
 TTC support Classification models as of now
 
@@ -20,3 +24,7 @@ A: Someone who does a lot of experimentation, and would like to train networks q
 - Hemanth
 - Prarthana Bhat
 - Satyajit Ghana
+
+---
+
+<h3 align="center">Made with 💘 TheTensorClan</h3>
