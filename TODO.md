@@ -1,6 +1,6 @@
 # TODO
 
-- remember how tensorflow_datasets is implemented ? maybe create a decorator such that
+- [X] remember how tensorflow_datasets is implemented ? maybe create a decorator such that
 lets say you want to create a new dataset and add that to the tensorclan, then you just do like
 ```python
 @tensorclan.dataset
