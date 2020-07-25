@@ -1,0 +1,19 @@
+name: tensorclan
+channels:
+  - pytorch
+  - anaconda
+  - conda-forge
+  - defaults
+dependencies:
+  - albumentations=0.4.6
+  - cudatoolkit=10.2.89
+  - python=3.8.5
+  - pytorch=1.5.1
+  - pyyaml=5.3.1
+  - setuptools=49.2.0
+  - sphinx=3.1.2
+  - sphinx_rtd_theme=0.4.3
+  - tensorboard=2.3.0
+  - torchvision=0.6.1
+prefix: /home/shadowleaf/anaconda3/envs/tensorclan
+

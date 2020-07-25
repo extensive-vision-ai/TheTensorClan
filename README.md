@@ -14,7 +14,7 @@ A: Someone who does a lot of experimentation, and would like to train networks q
 
 ## Design Guidelines
 
-- Use Python >= 3.7 Syntax
+- Use Python >= 3.8 Syntax
 - Make use of Type Hinting
 - Use Google Style Guide for Documenting Code
 
