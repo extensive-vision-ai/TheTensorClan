@@ -6,6 +6,10 @@
 
 TTC support Classification models as of now
 
+## Build
+
+![.github/workflows/docs_pages.yaml](https://github.com/extensive-vision-ai/TheTensorClan/workflows/.github/workflows/docs_pages.yaml/badge.svg?branch=master)
+
 ## FAQ
 
 Q: What and Who is this Package for ?
