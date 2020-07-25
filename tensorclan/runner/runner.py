@@ -6,7 +6,8 @@ from pathlib import Path
 import torch
 
 from tensorclan.utils import setup_logger, get_instance_v2
-from tensorclan.dataset import BaseDataset
+from tensorclan.dataset import BaseDataset, get_dataset
+from tensorclan.model import get_model
 from tensorclan.trainer import BaseTrainer
 import tensorclan.dataset.zoo as tc_dataset
 import tensorclan.dataset.augmentation as tc_augmentation
@@ -51,8 +52,7 @@ class Runner:
         )
 
         # build the dataset
-        dataset: BaseDataset = get_instance_v2(
-            module=tc_dataset,
+        dataset: BaseDataset = get_dataset(
             ctor_name=cfg['dataset']['name'],
             root=cfg['dataset']['root'],
             transforms=transforms
@@ -83,8 +83,7 @@ class Runner:
         #   name: MNISTV1
 
         # create the model
-        model = get_instance_v2(
-            module=tc_model,
+        model = get_model(
             ctor_name=cfg['model']['name']
         )
 

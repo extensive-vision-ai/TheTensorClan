@@ -36,7 +36,8 @@ class GPUTrainer(BaseTrainer):
         self.model = self.model.to(self.device)
 
         optimizer_to(self.optimizer, self.device)
-        scheduler_to(self.lr_scheduler, self.device)
+        if 'lr_scheduler' in cfg:
+            scheduler_to(self.lr_scheduler, self.device)
 
     def train_epoch(self, epoch):
         r"""trains the model for one epoch
@@ -246,3 +247,5 @@ class GPUTrainer(BaseTrainer):
                     'save_epoch': epoch,
                     'total_epochs': self.epochs
                 }, train_checkpoint)
+
+            logger.info('\n')

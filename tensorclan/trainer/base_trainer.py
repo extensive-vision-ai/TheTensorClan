@@ -77,6 +77,7 @@ class BaseTrainer(metaclass=ABCMeta):
         self.test_subset = test_subset
         self.config = config
         self.start_epoch = 0
+        self.lr_scheduler = None
 
         current_time = datetime.now().strftime('%b%d_%H-%M-%S')
         self.writer = SummaryWriter(
@@ -99,25 +100,26 @@ class BaseTrainer(metaclass=ABCMeta):
         #     type: OneCycleLR
         #     args:
         #         max_lr: 0.6
-        if cfg['lr_scheduler']['type'] == 'OneCycleLR':
-            self.lr_scheduler = get_instance_v2(
-                optim.lr_scheduler,
-                cfg['lr_scheduler']['type'],
-                optimizer=self.optimizer,
-                steps_per_epoch=len(self.train_loader),
-                epochs=self.epochs,
-                **cfg['lr_scheduler']['args']
-            )
-        else:
-            self.lr_scheduler = get_instance_v2(
-                optim.lr_scheduler,
-                cfg['lr_scheduler']['type'],
-                optimizer=self.optimizer,
-                **cfg['lr_scheduler']['args']
-            )
+        if 'lr_scheduler' in cfg:
+            if cfg['lr_scheduler']['type'] == 'OneCycleLR':
+                self.lr_scheduler = get_instance_v2(
+                    optim.lr_scheduler,
+                    cfg['lr_scheduler']['type'],
+                    optimizer=self.optimizer,
+                    steps_per_epoch=len(self.train_loader),
+                    epochs=self.epochs,
+                    **cfg['lr_scheduler']['args']
+                )
+            else:
+                self.lr_scheduler = get_instance_v2(
+                    optim.lr_scheduler,
+                    cfg['lr_scheduler']['type'],
+                    optimizer=self.optimizer,
+                    **cfg['lr_scheduler']['args']
+                )
 
         if state_dict is not None:
-            if 'scheduler' in state_dict:
+            if ('scheduler' in state_dict) and ('lr_scheduler' in cfg):
                 logger.info('Found lr_scheduler state')
                 self.lr_scheduler.load_state_dict(state_dict['scheduler'])
             self.best_accuracy = state_dict['best_accuracy']

@@ -9,10 +9,10 @@ conda env create -f devenv/environment.yaml
 or install the packages manually
 
 ```shell script
-conda create -n myenv python=3.8
+conda create -n tensorclan python=3.8
 conda install -c pytorch pytorch torchvision cudatoolkit=10.2
 conda install -c anaconda sphinx sphinx_rtd_theme pyyaml
-conda install -c conda-forge albumentations tensorboard
+conda install -c conda-forge albumentations tensorboard jupyter recommonmark
 ```
 
 ### Notes

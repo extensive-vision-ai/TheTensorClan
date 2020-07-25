@@ -1,0 +1,31 @@
+
+name: TTC_EXAMPLE
+log_dir: logs
+chkpt_dir: checkpoint
+use_checkpoints: false
+
+device: GPU
+
+model:
+    name: Net
+
+dataset:
+    name: MNIST
+    transforms: MNISTTransforms
+    root: data
+    loader_args:
+        batch_size: 128
+        num_workers: 2
+        shuffle: True
+        pin_memory: True
+
+loss: CrossEntropyLoss
+
+optimizer:
+    type: SGD
+    args:
+        lr: 0.01
+        momentum: 0.95
+
+training:
+    epochs: 10
