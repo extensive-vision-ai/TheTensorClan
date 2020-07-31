@@ -63,46 +63,46 @@ class GPUTrainer(BaseTrainer):
         running_loss: float = 0.0
         correct: int = 0
         total: int = 0
-        with alive_bar(len(pbar), bar='classic') as bar:
-            for batch_idx, (data, target) in enumerate(pbar):
-                # move the data of the specific dataset to our `device`
-                # data = getattr(tc_dataset, self.config['dataset']['name']).apply_on_batch(
-                #     data,
-                #     lambda D: D.to(self.device)
-                # )
-                data, target = data.to(self.device), target.to(self.device)
+        # with alive_bar(len(pbar), bar='classic') as bar:
+        for batch_idx, (data, target) in enumerate(pbar):
+            # move the data of the specific dataset to our `device`
+            # data = getattr(tc_dataset, self.config['dataset']['name']).apply_on_batch(
+            #     data,
+            #     lambda D: D.to(self.device)
+            # )
+            data, target = data.to(self.device), target.to(self.device)
 
-                # zero out the gradients, we don't want to accumulate them
-                self.optimizer.zero_grad()
+            # zero out the gradients, we don't want to accumulate them
+            self.optimizer.zero_grad()
 
-                outputs = self.model(data)
+            outputs = self.model(data)
 
-                # calculate the loss
-                loss = self.loss_fn(outputs, target)
+            # calculate the loss
+            loss = self.loss_fn(outputs, target)
 
-                with torch.no_grad():
-                    _, predicted = torch.max(outputs.data, 1)
-                    total += target.size(0)
-                    correct += (predicted == target).sum().item()
-                    running_loss += loss.item()
+            with torch.no_grad():
+                _, predicted = torch.max(outputs.data, 1)
+                total += target.size(0)
+                correct += (predicted == target).sum().item()
+                running_loss += loss.item()
 
-                # update the gradients
-                loss.backward()
+            # update the gradients
+            loss.backward()
 
-                # step the optimizer
-                self.optimizer.step()
+            # step the optimizer
+            self.optimizer.step()
 
-                # step the scheduler
-                if isinstance(self.lr_scheduler, optim.lr_scheduler.OneCycleLR):
-                    self.lr_scheduler.step()
+            # step the scheduler
+            if isinstance(self.lr_scheduler, optim.lr_scheduler.OneCycleLR):
+                self.lr_scheduler.step()
 
-                # pbar.set_description(
-                #     desc=f'loss={loss.item():.4f} seg_loss={l1.item():.4f} depth_loss={l2.item():.4f} batch_id={batch_idx}')
+            # pbar.set_description(
+            #     desc=f'loss={loss.item():.4f} seg_loss={l1.item():.4f} depth_loss={l2.item():.4f} batch_id={batch_idx}')
 
-                self.writer.add_scalar(
-                    'BatchLoss/Train/loss', loss.item(), epoch*len(pbar) + batch_idx)
+            self.writer.add_scalar(
+                'BatchLoss/Train/loss', loss.item(), epoch*len(pbar) + batch_idx)
 
-                bar()
+            # bar()
 
         running_loss /= len(pbar)
         accuracy = 100 * correct / total
@@ -141,28 +141,28 @@ class GPUTrainer(BaseTrainer):
         # pbar = tqdm(self.test_loader, dynamic_ncols=True)
         pbar = self.test_loader
 
-        with alive_bar(len(pbar), bar='classic') as bar:
-            for batch_idx, (data, target) in enumerate(pbar):
-                # move the data of the specific dataset to our `device`
-                # data = getattr(tc_dataset, self.config['dataset']['name']).apply_on_batch(
-                #     data,
-                #     lambda x: x.to(self.device)
-                # )
-                data, target = data.to(self.device), target.to(self.device)
+        # with alive_bar(len(pbar), bar='classic') as bar:
+        for batch_idx, (data, target) in enumerate(pbar):
+            # move the data of the specific dataset to our `device`
+            # data = getattr(tc_dataset, self.config['dataset']['name']).apply_on_batch(
+            #     data,
+            #     lambda x: x.to(self.device)
+            # )
+            data, target = data.to(self.device), target.to(self.device)
 
-                with torch.no_grad():
-                    outputs = self.model(data)
+            with torch.no_grad():
+                outputs = self.model(data)
 
-                    loss = self.loss_fn(outputs, target)
+                loss = self.loss_fn(outputs, target)
 
-                    _, predicted = torch.max(outputs.data, 1)
-                    total += target.size(0)
-                    correct += (predicted == target).sum().item()
+                _, predicted = torch.max(outputs.data, 1)
+                total += target.size(0)
+                correct += (predicted == target).sum().item()
 
-                    running_loss += loss.item()
+                running_loss += loss.item()
 
-                # pbar.set_description(desc=f'testing batch_id={batch_idx}')
-                bar()
+            # pbar.set_description(desc=f'testing batch_id={batch_idx}')
+            #     bar()
 
         running_loss /= len(pbar)
         accuracy = 100 * correct / total
