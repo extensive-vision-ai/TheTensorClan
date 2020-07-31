@@ -223,13 +223,17 @@ class GPUTrainer(BaseTrainer):
                     train_checkpoint = chkpt_path / 'train_checkpoint_best.pt'
                     torch.save(self.model.state_dict(), model_checkpoint)
 
-                    torch.save({
+                    state_dict = {
                         'optimizer': self.optimizer.state_dict(),
-                        'scheduler': self.lr_scheduler.state_dict(),
                         'best_accuracy': self.best_accuracy,
                         'save_epoch': epoch,
                         'total_epochs': self.epochs
-                    }, train_checkpoint)
+                    }
+
+                    if self.lr_scheduler:
+                        state_dict['scheduler'] = self.lr_scheduler.state_dict()
+
+                    torch.save(state_dict, train_checkpoint)
 
                 logger.info('=> Saving checkpoint ...')
 
@@ -240,12 +244,16 @@ class GPUTrainer(BaseTrainer):
                 train_checkpoint = chkpt_path / 'train_checkpoint.pt'
                 torch.save(self.model.state_dict(), model_checkpoint)
 
-                torch.save({
+                state_dict = {
                     'optimizer': self.optimizer.state_dict(),
-                    'scheduler': self.lr_scheduler.state_dict(),
                     'best_accuracy': self.best_accuracy,
                     'save_epoch': epoch,
                     'total_epochs': self.epochs
-                }, train_checkpoint)
+                }
+
+                if self.lr_scheduler:
+                    state_dict['scheduler'] = self.lr_scheduler.state_dict()
+
+                torch.save(state_dict, train_checkpoint)
 
             logger.info('\n')

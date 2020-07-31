@@ -94,7 +94,7 @@ class BaseTrainer(metaclass=ABCMeta):
         self.epochs = self.config['training']['epochs'] - self.start_epoch
 
         # best accuracy
-        self.best_accuracy = 0
+        self.best_accuracy = {'accuracy': 0}
 
         # lr_scheduler:
         #     type: OneCycleLR

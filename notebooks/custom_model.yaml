@@ -2,7 +2,7 @@
 name: TTC_EXAMPLE
 log_dir: logs
 chkpt_dir: checkpoint
-use_checkpoints: false
+use_checkpoints: true
 
 device: GPU
 
