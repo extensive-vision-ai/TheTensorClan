@@ -1,4 +1,3 @@
-import tensorclan.model.zoo as tc_model
 from tensorclan.utils import setup_logger
 
 logger = setup_logger(__name__)
@@ -14,6 +13,7 @@ def model(cls):
 
 
 def get_model(ctor_name: str, *args, **kwargs):
+    import tensorclan.model.zoo as tc_model
     if hasattr(tc_model, ctor_name):
         logger.info(f'Building {tc_model.__name__}.{ctor_name}')
         return getattr(tc_model, ctor_name)(*args, **kwargs)

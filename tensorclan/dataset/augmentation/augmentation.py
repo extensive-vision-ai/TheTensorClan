@@ -1,4 +1,3 @@
-import tensorclan.dataset.augmentation as tc_augmentation
 from tensorclan.utils import setup_logger
 
 logger = setup_logger(__name__)
@@ -14,6 +13,7 @@ def augmentation(cls):
 
 
 def get_augmentation(ctor_name: str, *args, **kwargs):
+    import tensorclan.dataset.augmentation as tc_augmentation
     if hasattr(tc_augmentation, ctor_name):
         logger.info(f'Building {tc_augmentation.__name__}.{ctor_name}')
         return getattr(tc_augmentation, ctor_name)(*args, **kwargs)

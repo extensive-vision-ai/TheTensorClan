@@ -1,4 +1,3 @@
-import tensorclan.dataset.zoo as tc_dataset
 from tensorclan.utils import setup_logger
 
 logger = setup_logger(__name__)
@@ -14,6 +13,7 @@ def dataset(cls):
 
 
 def get_dataset(ctor_name: str, *args, **kwargs):
+    import tensorclan.dataset.zoo as tc_dataset
     if hasattr(tc_dataset, ctor_name):
         logger.info(f'Building {tc_dataset.__name__}.{ctor_name}')
         return getattr(tc_dataset, ctor_name)(*args, **kwargs)
