@@ -73,7 +73,7 @@ class GPUTrainer(BaseTrainer):
             # zero out the gradients, we don't want to accumulate them
             self.optimizer.zero_grad()
 
-            outputs = self.model(data.unsqueeze(1))
+            outputs = self.model(data)
 
             # calculate the loss
             loss = self.loss_fn(outputs, target)
@@ -146,7 +146,7 @@ class GPUTrainer(BaseTrainer):
             data, target = data.to(self.device), target.to(self.device)
 
             with torch.no_grad():
-                outputs = self.model(data.unsqueeze(1))
+                outputs = self.model(data)
 
                 loss = self.loss_fn(outputs, target)
 
