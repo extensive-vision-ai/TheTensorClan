@@ -87,6 +87,7 @@ def get_duplicates(dir_path, recursive=False):
 
     return dict(hashmaps), files_visited
 
+
 def remove_duplicates(dir_path, recursive=False):
     """
     Remove duplicate files in given directory path
