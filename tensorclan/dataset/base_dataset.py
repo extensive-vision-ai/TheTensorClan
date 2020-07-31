@@ -1,7 +1,9 @@
-from abc import ABCMeta, abstractmethod
+from abc import ABC, abstractmethod
+
+from torch.utils.data import Dataset
 
 
-class BaseDataset(metaclass=ABCMeta):
+class BaseDataset(ABC, Dataset):
     @abstractmethod
     def split_dataset(self):
         """
@@ -13,9 +15,4 @@ class BaseDataset(metaclass=ABCMeta):
     @staticmethod
     @abstractmethod
     def plot_sample(sample):
-        pass
-
-    @staticmethod
-    @abstractmethod
-    def apply_on_batch(batch, apply_func):
         pass

@@ -19,7 +19,7 @@ def get_dataset(ctor_name: str, *args, **kwargs):
         return getattr(tc_dataset, ctor_name)(*args, **kwargs)
 
     if ctor_name in _REGISTERED_DATASET:
-        logger.info(f'Building User Model {_REGISTERED_DATASET[ctor_name]}.{ctor_name}')
+        logger.info(f'Building User Dataset {_REGISTERED_DATASET[ctor_name]}.{ctor_name}')
         return _REGISTERED_DATASET[ctor_name](*args, **kwargs)
 
     raise ModuleNotFoundError

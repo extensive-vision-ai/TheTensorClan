@@ -5,6 +5,7 @@ from pathlib import Path
 
 import torch
 
+from tensorclan.dataset.augmentation import get_augmentation, BaseAugmentation
 from tensorclan.utils import setup_logger, get_instance_v2
 from tensorclan.dataset import BaseDataset, get_dataset
 from tensorclan.model import get_model
@@ -46,8 +47,7 @@ class Runner:
         #       pin_memory: True
 
         # build transforms
-        transforms = get_instance_v2(
-            module=tc_augmentation,
+        transforms: BaseAugmentation = get_augmentation(
             ctor_name=cfg['dataset']['transforms']
         )
 

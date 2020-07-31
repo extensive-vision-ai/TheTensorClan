@@ -10,8 +10,8 @@ model:
     name: Net
 
 dataset:
-    name: MNIST
-    transforms: MNISTTransforms
+    name: MNISTV2
+    transforms: MNISTTransformsV2
     root: data
     loader_args:
         batch_size: 128
@@ -28,4 +28,5 @@ optimizer:
         momentum: 0.95
 
 training:
-    epochs: 10
+    epochs: 5
+
