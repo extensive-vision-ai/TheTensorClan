@@ -54,8 +54,8 @@ class Runner:
         # build the dataset
         dataset: BaseDataset = get_dataset(
             ctor_name=cfg['dataset']['name'],
-            root=cfg['dataset']['root'],
-            transforms=transforms
+            transforms=transforms,
+            **cfg['dataset']['args']
         )
 
         # get the train-test splits
