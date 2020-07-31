@@ -7,7 +7,7 @@ import torch
 
 from tensorclan.dataset.augmentation import get_augmentation, BaseAugmentation
 from tensorclan.utils import setup_logger, get_instance_v2
-from tensorclan.dataset import BaseDataset, get_dataset
+from tensorclan.dataset import BaseDataset, get_dataset, get_dataset_cls
 from tensorclan.model import get_model
 from tensorclan.trainer import BaseTrainer
 import tensorclan.dataset.zoo as tc_dataset
@@ -54,12 +54,11 @@ class Runner:
         # build the dataset
         dataset: BaseDataset = get_dataset(
             ctor_name=cfg['dataset']['name'],
-            transforms=transforms,
             **cfg['dataset']['args']
         )
 
         # get the train-test splits
-        train_subset, test_subset = dataset.split_dataset()
+        train_subset, test_subset = get_dataset_cls(ctor_name=cfg['dataset']['name']).split_dataset(dataset=dataset, transforms=transforms)
 
         if cfg['use_checkpoints']:
             # check if the train_subset and test_subset indices are present in disk

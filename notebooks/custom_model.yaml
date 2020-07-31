@@ -12,7 +12,8 @@ model:
 dataset:
     name: MNISTV2
     transforms: MNISTTransformsV2
-    root: data
+    args:
+        root: data
     loader_args:
         batch_size: 128
         num_workers: 2

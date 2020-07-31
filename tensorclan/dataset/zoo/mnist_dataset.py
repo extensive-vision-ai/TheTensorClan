@@ -9,30 +9,29 @@ class MNIST(BaseDataset):
     test_set: datasets.MNIST
     train_set: datasets.MNIST
 
-    def __init__(self, root: str, transforms: BaseAugmentation):
+    def __init__(self, root: str, transforms=None):
         self.data_dir = root
+        self.transforms = transforms
 
-        self.train_set = datasets.MNIST(
-            self.data_dir,
+    @staticmethod
+    def split_dataset(dataset, transforms):
+
+        train_set = datasets.MNIST(
+            dataset.data_dir,
             train=True,
             download=True,
             transform=transforms.build_transforms(train=True),
         )
 
-        self.test_set = datasets.MNIST(
-            self.data_dir,
+        test_set = datasets.MNIST(
+            dataset.data_dir,
             train=False,
             download=True,
             transform=transforms.build_transforms(train=False)
         )
-
-    def split_dataset(self):
-        return Subset(self.train_set, indices=range(0, len(self.train_set))), Subset(self.test_set, indices=range(0, len(self.test_set)))
+        return Subset(train_set, indices=range(0, len(train_set))), Subset(test_set, indices=range(0, len(test_set)))
 
     @staticmethod
     def plot_sample(sample):
         pass
 
-    @staticmethod
-    def apply_on_batch(batch, apply_func):
-        pass

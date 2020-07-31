@@ -1,3 +1,3 @@
 from .base_dataset import BaseDataset
 from .zoo import *
-from .dataset import dataset, get_dataset
+from .dataset import dataset, get_dataset, get_dataset_cls
