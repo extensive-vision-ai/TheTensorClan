@@ -4,3 +4,4 @@ albumentations~=0.4.6
 numpy~=1.18.5
 torchvision~=0.6.1
 torch~=1.5.1
+alive-progress~=1.6.1
