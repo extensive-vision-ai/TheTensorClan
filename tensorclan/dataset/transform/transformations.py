@@ -3,7 +3,7 @@ from abc import ABCMeta, abstractmethod
 import numpy as np
 
 
-class BaseAugmentation(metaclass=ABCMeta):
+class BaseTransform(metaclass=ABCMeta):
     def build_transforms(self, train: bool):
         if train:
             return AlbumentationTransforms(self.build_train())

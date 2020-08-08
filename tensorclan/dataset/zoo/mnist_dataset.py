@@ -1,5 +1,5 @@
 from tensorclan.dataset import BaseDataset
-from tensorclan.dataset.augmentation import BaseAugmentation
+from tensorclan.dataset.transform import BaseTransform
 
 from torchvision import datasets
 from torch.utils.data import Subset

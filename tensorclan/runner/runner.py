@@ -5,13 +5,13 @@ from pathlib import Path
 
 import torch
 
-from tensorclan.dataset.augmentation import get_augmentation, BaseAugmentation
+from tensorclan.dataset.transform import get_transforms, BaseTransform
 from tensorclan.utils import setup_logger, get_instance_v2
 from tensorclan.dataset import BaseDataset, get_dataset, get_dataset_cls
 from tensorclan.model import get_model
 from tensorclan.trainer import BaseTrainer
 import tensorclan.dataset.zoo as tc_dataset
-import tensorclan.dataset.augmentation as tc_augmentation
+import tensorclan.dataset.transform as tc_augmentation
 import tensorclan.model.zoo as tc_model
 import tensorclan.trainer as tc_trainer
 
@@ -47,7 +47,7 @@ class Runner:
         #       pin_memory: True
 
         # build transforms
-        transforms: BaseAugmentation = get_augmentation(
+        transforms: BaseTransform = get_transforms(
             ctor_name=cfg['dataset']['transforms']
         )
 

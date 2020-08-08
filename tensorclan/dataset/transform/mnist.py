@@ -1,6 +1,6 @@
 from typing import Tuple
 
-from tensorclan.dataset.augmentation import BaseAugmentation
+from tensorclan.dataset.transform import BaseTransform
 
 import albumentations as A
 import albumentations.pytorch.transforms as AT
@@ -8,7 +8,7 @@ import albumentations.pytorch.transforms as AT
 import torch
 
 
-class MNISTTransforms(BaseAugmentation):
+class MNISTTransforms(BaseTransform):
 
     mean: Tuple[float] = (0.1307,)
     std: Tuple[float] = (0.3081,)
