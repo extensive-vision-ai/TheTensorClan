@@ -21,6 +21,22 @@ def split_dataset(dataset, div_factor: int = 1, train_ratio: float = 0.7):
     return train_subset, test_subset
 
 
+def get_mean_and_std(dataset):
+    '''Compute the mean and std value of dataset.'''
+    dataloader = torch.utils.data.DataLoader(
+        dataset, batch_size=1, shuffle=True, num_workers=2)
+    mean = torch.zeros(3)
+    std = torch.zeros(3)
+    print('==> Computing mean and std..')
+    for inputs, targets in dataloader:
+        for i in range(3):
+            mean[i] += inputs[:, i, :, :].mean()
+            std[i] += inputs[:, i, :, :].std()
+    mean.div_(len(dataset))
+    std.div_(len(dataset))
+    return mean, std
+
+
 def _get_file_hash(path):
     """
     Generate hash of the file, using specific set of blocks of the file instead of whole file
