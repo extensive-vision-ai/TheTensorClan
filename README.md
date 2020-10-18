@@ -1,4 +1,4 @@
-<div align="center"> <img src="logo.png" > </div>
+<div align="center"> <img src="logo.svg" > </div>
 
 <h1 align="center">Tensor Training Framework</h1>
 
